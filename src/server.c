@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ulfius.h>
 #include <jansson.h>
-
+#include <stdlib.h>
 
 #define PORT 8537
 #define PREFIX "/api"
@@ -10,7 +10,7 @@ int callback_get_data(const struct _u_request *request,
     struct _u_response *response, void *user_data)
 {
   json_t * body_res = json_object();
-  json_object_set(body_res, "medicion", json_integer(50));
+  json_object_set(body_res, "medicion", json_integer(rand() % 20));
   ulfius_set_json_body_response(response, MHD_HTTP_OK, body_res);
   return U_CALLBACK_CONTINUE;
 }
@@ -19,6 +19,7 @@ int callback_get_data(const struct _u_request *request,
 int main()
 {
   int retval; // Para guardar valores de retorno
+  srand(12121);
 
   /* Seteo de numero de puerto para el framework */
   struct _u_instance instance; // Para inicializar el framework ulfius
