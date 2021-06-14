@@ -33,7 +33,7 @@ int callback_get_data(__attribute__((unused)) const struct _u_request *request,
     return U_CALLBACK_ERROR;
   }
   close(fd_dev);
-  json_object_set(body_res, "medicion", json_integer(rand() % 20));
+  json_object_set(body_res, "medicion", json_integer(atoi(medicion)));
   ulfius_set_json_body_response(response, MHD_HTTP_OK, body_res);
   return U_CALLBACK_CONTINUE;
 }
@@ -44,7 +44,6 @@ int callback_set_sensor(const struct _u_request *request,
 int main()
 {
   int retval; // Para guardar valores de retorno
-  srand(12121);
 
   /* Seteo de numero de puerto para el framework */
   struct _u_instance instance; // Para inicializar el framework ulfius
@@ -76,5 +75,3 @@ int main()
   ulfius_clean_instance(&instance);
   return 0;
 }
-
-
