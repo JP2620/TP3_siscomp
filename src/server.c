@@ -62,11 +62,15 @@ int callback_set_sensor(const struct _u_request *request,
   }
   if (strcmp(sensor, "sensor1") == 0)
   {
-    msg = "PONE EL 1";
+    msg = "sensor1\0";
   }
   else if (strcmp(sensor, "sensor2") == 0)
   {
-    msg = "PONE EL 2";
+    msg = "sensor2\0";
+  }
+  else if (strcmp(sensor, "disable") == 0)
+  {
+    msg = "disable\0";
   }
   else
   {
